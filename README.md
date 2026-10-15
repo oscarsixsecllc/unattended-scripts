@@ -83,5 +83,6 @@ Posting is the same everywhere: a `curl` POST of a small JSON body to a channel 
 
 Each script carries a `# Version:` line under the shebang. Check it before asking about behavior; the archive is re-published when anything changes.
 
+- 1.1.1 (2026-10-15): LICENSE (Apache-2.0, Oscar Six Security LLC) added as the eighth file, matching the public repo at github.com/oscarsixsecllc/unattended-scripts; archive contents now unpack into a versioned folder (unattended-scripts-1.1.1/) instead of loose files. No functional changes.
 - 1.1.0 (2026-10-14): version lines added to every script and to crontab.example; transport note added to heartbeat-check.sh and this README. No functional changes.
 - 1.0.0 (2026-10-04): first published set (disk-cleanup, disk-usage-post, heartbeat-check, security-audit, crontab.example, sanitization notes).

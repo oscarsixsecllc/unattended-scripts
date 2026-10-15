@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Version:   1.1.0 (2026-10-14). See README.md, "Versions".
+# Version:   1.1.1 (2026-10-15). See README.md, "Versions".
 # ---------------------------------------------------------------------------
 # security-audit.sh
 #
