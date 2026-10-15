@@ -1,0 +1,39 @@
+# Version: 1.1.0 (2026-10-14)
+# crontab.example
+#
+# The cron lines that wire up the four scripts in this archive. Copy the
+# lines you want into `crontab -e`, or keep this file under version control
+# and load it with `crontab crontab.example` (that REPLACES your whole
+# crontab, so merge first if you already have entries).
+#
+# Keep a committed copy of your crontab. security-audit.sh compares the live
+# crontab against that copy every run and reports drift. Point its
+# CRONTAB_CANONICAL at the committed file.
+#
+# Three cron gotchas the book calls out:
+#   1. cron does not read your shell profile. Set env vars here or inside
+#      the scripts. PATH below is a safe default for Debian and Ubuntu.
+#   2. Keep every entry on one line.
+#   3. cron treats a bare % as a newline. Write any % in a command as \%.
+#
+# Times are host-local. Check `timedatectl` if you are not sure what that is.
+#
+# TODO: reader -- replace <INSTALL_DIR> with the absolute directory where you
+#                 put these scripts, and <LOG_DIR> with a writable log directory.
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+# Set MAILTO to an address if you want cron to email nonzero exits.
+MAILTO=""
+
+# Weekly disk cleanup, Sunday 02:00. Chapter 6.
+0 2 * * 0 <INSTALL_DIR>/disk-cleanup.sh >> <LOG_DIR>/disk-cleanup.log 2>&1
+
+# Daily disk-usage post, 16:00. Chapter 6.
+0 16 * * * <INSTALL_DIR>/disk-usage-post.sh >> <LOG_DIR>/disk-usage-post.log 2>&1
+
+# "Are you still there?" heartbeat check, every 6 hours. Chapter 6.
+0 */6 * * * <INSTALL_DIR>/heartbeat-check.sh >> <LOG_DIR>/heartbeat-check.log 2>&1
+
+# Security audit, every 4 hours. Chapter 11. Quiet when clean.
+0 */4 * * * <INSTALL_DIR>/security-audit.sh >> <LOG_DIR>/security-audit.log 2>&1
